@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "banking"
+version = "0.0.1"
+description = "Load and merge bank CSV statement exports into a normalised pandas DataFrame."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Phil Massyn", email = "phil.massyn@icloud.com" }]
+keywords = ["banking"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = ["pandas>=2.0", "python-dotenv>=1.0"]
+
+[project.urls]
+Homepage = "https://github.com/massyn/banking"
+Source = "https://github.com/massyn/banking"
+
+[project.optional-dependencies]
+dev = ["pytest", "black", "ruff"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/banking"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.black]
+target-version = ["py310"]
