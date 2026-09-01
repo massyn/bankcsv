@@ -11,9 +11,9 @@ Each module exposes:
 
 from __future__ import annotations
 
-from banking.loaders.anz import load_anz
-from banking.loaders.bankwest import load_bankwest
-from banking.loaders.cba import load_cba
-from banking.loaders.macquarie import load_macquarie
+from bankcsv.loaders.anz import load_anz
+from bankcsv.loaders.bankwest import load_bankwest
+from bankcsv.loaders.cba import load_cba
+from bankcsv.loaders.macquarie import load_macquarie
 
 __all__ = ["load_anz", "load_bankwest", "load_cba", "load_macquarie"]

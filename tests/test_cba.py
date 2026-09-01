@@ -1,4 +1,4 @@
-"""Tests for banking.loaders.cba."""
+"""Tests for bankcsv.loaders.cba."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
-from banking.loaders.cba import load_cba, try_parse
-from banking.schema import SCHEMA
+from bankcsv.loaders.cba import load_cba, try_parse
+from bankcsv.schema import SCHEMA
 
 
 def _write(folder: Path, name: str, rows: list[str]) -> None:

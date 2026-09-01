@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking.schema import build_frame
+from bankcsv.schema import build_frame
 
 logger = logging.getLogger(__name__)
 

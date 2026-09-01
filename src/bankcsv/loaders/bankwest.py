@@ -1,8 +1,8 @@
 """
 Bankwest CSV loader.
 
-Reads Bankwest transaction CSV exports and merges them onto the shared banking
-schema (:mod:`banking.schema`) using the date-range replacement strategy: a
+Reads Bankwest transaction CSV exports and merges them onto the shared bankcsv
+schema (:mod:`bankcsv.schema`) using the date-range replacement strategy: a
 newer export is authoritative over every transaction date it covers, so its
 rows overwrite anything an older export said about that span (this is how
 pending "AUTHORISATION ONLY" rows get replaced by their settled versions).
@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking.loaders._common import load_folder, merge_by_account
+from bankcsv.loaders._common import load_folder, merge_by_account
 
 logger = logging.getLogger(__name__)
 
@@ -108,7 +108,7 @@ def merge(exports: list[list[dict]]) -> list[dict]:
 def load_bankwest(folder: str) -> pd.DataFrame:
     """
     Load and merge Bankwest CSV exports from ``folder`` (or a single CSV file)
-    into one DataFrame on the shared banking schema.
+    into one DataFrame on the shared bankcsv schema.
 
     Files whose header is not the Bankwest layout are skipped with a warning;
     an empty DataFrame is returned when nothing parses.

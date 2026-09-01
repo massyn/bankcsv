@@ -1,11 +1,11 @@
-"""Tests for banking.ingest (bank-agnostic auto-detection)."""
+"""Tests for bankcsv.ingest (bank-agnostic auto-detection)."""
 
 from __future__ import annotations
 
 from pathlib import Path
 
-from banking import Banking, ingest
-from banking.schema import SCHEMA
+from bankcsv import Banking, ingest
+from bankcsv.schema import SCHEMA
 
 BANKWEST_HEADER = (
     "BSB Number,Account Number,Transaction Date,Narration,Cheque,"
@@ -76,7 +76,7 @@ def test_nothing_recognised_returns_empty_schema_frame(tmp_path: Path) -> None:
     assert df.empty
 
 
-def test_banking_ingest_method_matches_function(tmp_path: Path) -> None:
+def test_bankcsv_ingest_method_matches_function(tmp_path: Path) -> None:
     _bankwest(tmp_path, "a.csv")
     _anz(tmp_path, "b.csv")
 

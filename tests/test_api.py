@@ -1,4 +1,4 @@
-"""Tests for the banking.Banking entry point."""
+"""Tests for the bankcsv.Banking entry point."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking import Banking, load_anz, load_bankwest
-from banking.schema import SCHEMA
+from bankcsv import Banking, load_anz, load_bankwest
+from bankcsv.schema import SCHEMA
 
 BANKWEST_HEADER = (
     "BSB Number,Account Number,Transaction Date,Narration,Cheque,"

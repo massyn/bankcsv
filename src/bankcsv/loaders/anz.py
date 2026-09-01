@@ -1,8 +1,8 @@
 """
 ANZ CSV loader.
 
-Reads ANZ transaction CSV exports and merges them onto the shared banking
-schema (:mod:`banking.schema`) using the same date-range replacement strategy
+Reads ANZ transaction CSV exports and merges them onto the shared bankcsv
+schema (:mod:`bankcsv.schema`) using the same date-range replacement strategy
 as the Bankwest loader: a newer export is authoritative over every transaction
 date it covers, so its rows replace whatever an older export said about that
 span.
@@ -25,7 +25,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking.loaders._common import load_folder, merge_span
+from bankcsv.loaders._common import load_folder, merge_span
 
 logger = logging.getLogger(__name__)
 
@@ -96,7 +96,7 @@ def merge(exports: list[list[dict]]) -> list[dict]:
 def load_anz(folder: str) -> pd.DataFrame:
     """
     Load and merge ANZ CSV exports from ``folder`` (or a single CSV file) into
-    one DataFrame on the shared banking schema.
+    one DataFrame on the shared bankcsv schema.
 
     Files that do not match the ANZ layout are skipped with a warning; an empty
     DataFrame is returned when nothing parses.

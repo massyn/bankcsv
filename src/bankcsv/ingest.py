@@ -14,9 +14,9 @@ from collections.abc import Iterable
 
 import pandas as pd
 
-from banking.loaders import anz, bankwest, cba, macquarie
-from banking.loaders._common import PathLike, discover_csv_files
-from banking.schema import build_frame
+from bankcsv.loaders import anz, bankwest, cba, macquarie
+from bankcsv.loaders._common import PathLike, discover_csv_files
+from bankcsv.schema import build_frame
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ def ingest(paths: PathLike | Iterable[PathLike]) -> pd.DataFrame:
     """Discover, auto-detect and merge bank CSV exports under ``paths``.
 
     ``paths`` may be a folder, a single ``.csv`` file, or an iterable of either.
-    Returns one DataFrame on :data:`banking.schema.SCHEMA`, sorted by date;
+    Returns one DataFrame on :data:`bankcsv.schema.SCHEMA`, sorted by date;
     empty if nothing was recognised.
     """
     claims: dict = {module: [] for module in REGISTRY}

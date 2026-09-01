@@ -15,7 +15,7 @@ import sys
 
 from dotenv import load_dotenv
 
-from banking import Banking
+from bankcsv import Banking
 
 load_dotenv()
 

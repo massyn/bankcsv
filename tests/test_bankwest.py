@@ -1,4 +1,4 @@
-"""Tests for banking.loaders.bankwest."""
+"""Tests for bankcsv.loaders.bankwest."""
 
 from __future__ import annotations
 
@@ -6,8 +6,8 @@ from datetime import date
 from decimal import Decimal
 from pathlib import Path
 
-from banking.loaders.bankwest import load_bankwest
-from banking.schema import SCHEMA
+from bankcsv.loaders.bankwest import load_bankwest
+from bankcsv.schema import SCHEMA
 
 HEADER = (
     "BSB Number,Account Number,Transaction Date,Narration,Cheque,"

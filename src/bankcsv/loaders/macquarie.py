@@ -1,8 +1,8 @@
 """
 Macquarie CSV loader.
 
-Reads Macquarie transaction CSV exports and merges them onto the shared banking
-schema (:mod:`banking.schema`) using the date-range replacement strategy.
+Reads Macquarie transaction CSV exports and merges them onto the shared bankcsv
+schema (:mod:`bankcsv.schema`) using the date-range replacement strategy.
 
 A file is recognised as Macquarie by its header row: the core columns
 (``Transaction Date``, ``Details``, ``Account``, ``Debit``, ``Credit``,
@@ -26,7 +26,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking.loaders._common import load_folder, merge_by_account
+from bankcsv.loaders._common import load_folder, merge_by_account
 
 logger = logging.getLogger(__name__)
 
@@ -129,7 +129,7 @@ def merge(exports: list[list[dict]]) -> list[dict]:
 def load_macquarie(folder: str) -> pd.DataFrame:
     """
     Load and merge Macquarie CSV exports from ``folder`` (or a single CSV file)
-    into one DataFrame on the shared banking schema.
+    into one DataFrame on the shared bankcsv schema.
 
     Files whose header is not the Macquarie layout are skipped with a warning;
     an empty DataFrame is returned when nothing parses.

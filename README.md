@@ -1,4 +1,4 @@
-# banking
+# bankcsv
 
 Load a folder of a bank's CSV statement exports into a single, normalised
 `pandas.DataFrame`. Overlapping downloads (the bank only lets you export a
@@ -17,7 +17,7 @@ pip install -e ".[dev]"
 ## Usage
 
 ```python
-from banking import Banking
+from bankcsv import Banking
 
 b = Banking()
 df = b.bankwest("~/iCloudDrive/Bankwest")   # folder known to be Bankwest

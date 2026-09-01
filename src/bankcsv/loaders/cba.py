@@ -1,8 +1,8 @@
 """
 CBA (Commonwealth Bank) CSV loader.
 
-Reads CBA transaction CSV exports and merges them onto the shared banking
-schema (:mod:`banking.schema`) using the date-range replacement strategy.
+Reads CBA transaction CSV exports and merges them onto the shared bankcsv
+schema (:mod:`bankcsv.schema`) using the date-range replacement strategy.
 
 CBA exports are headerless with four fields per line:
 
@@ -25,7 +25,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from banking.loaders._common import load_folder, merge_by_account
+from bankcsv.loaders._common import load_folder, merge_by_account
 
 logger = logging.getLogger(__name__)
 
@@ -106,7 +106,7 @@ def merge(exports: list[list[dict]]) -> list[dict]:
 def load_cba(folder: str) -> pd.DataFrame:
     """
     Load and merge CBA CSV exports from ``folder`` (or a single CSV file) into
-    one DataFrame on the shared banking schema.
+    one DataFrame on the shared bankcsv schema.
 
     Files that do not match the CBA layout are skipped with a warning; an empty
     DataFrame is returned when nothing parses.

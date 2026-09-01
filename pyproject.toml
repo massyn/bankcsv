@@ -3,14 +3,14 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "banking"
+name = "bankcsv"
 version = "0.0.1"
 description = "Load and merge bank CSV statement exports into a normalised pandas DataFrame."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [{ name = "Phil Massyn", email = "phil.massyn@icloud.com" }]
-keywords = ["banking"]
+keywords = ["bank", "csv", "statements", "transactions", "pandas"]
 classifiers = [
     "Development Status :: 1 - Planning",
     "Programming Language :: Python :: 3",
@@ -27,7 +27,7 @@ Source = "https://github.com/massyn/banking"
 dev = ["pytest", "black", "ruff"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/banking"]
+packages = ["src/bankcsv"]
 
 [tool.ruff]
 target-version = "py310"
