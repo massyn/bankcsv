@@ -8,7 +8,7 @@ version = "0.0.1"
 description = "Load and merge bank CSV statement exports into a normalised pandas DataFrame."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "MIT" }
+license = { file = "LICENSE" }
 authors = [{ name = "Phil Massyn", email = "phil.massyn@icloud.com" }]
 keywords = ["banking"]
 classifiers = [
