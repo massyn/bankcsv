@@ -27,7 +27,7 @@ from bankcsv.loaders import load_anz, load_bankwest, load_cba, load_macquarie
 from bankcsv.loaders._common import PathLike
 from bankcsv.schema import SCHEMA, build_frame
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 __all__ = [
     "SCHEMA",

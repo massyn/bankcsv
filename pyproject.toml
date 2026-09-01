@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "bankcsv"
-version = "0.0.1"
+version = "0.0.2"
 description = "Load and merge bank CSV statement exports into a normalised pandas DataFrame."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -20,8 +20,8 @@ classifiers = [
 dependencies = ["pandas>=2.0", "python-dotenv>=1.0"]
 
 [project.urls]
-Homepage = "https://github.com/massyn/banking"
-Source = "https://github.com/massyn/banking"
+Homepage = "https://github.com/massyn/bankcsv"
+Source = "https://github.com/massyn/bankcsv"
 
 [project.optional-dependencies]
 dev = ["pytest", "black", "ruff"]
