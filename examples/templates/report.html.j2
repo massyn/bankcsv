@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transaction report</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+  <style>
+    :root {
+      --pos: #12805c;
+      --neg: #c23b56;
+      --ink: #1f2733;
+      --muted: #6b7683;
+      --line: #e7eaef;
+      --card: #ffffff;
+    }
+    body {
+      color: var(--ink);
+      background: linear-gradient(180deg, #eef2f7 0%, #f6f8fb 240px, #f6f8fb 100%);
+      font-feature-settings: "tnum" 1;
+    }
+    .page { max-width: min(1600px, 96vw); }
+    .report-head h1 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: .25rem;
+    }
+    .report-head .lead { color: var(--muted); font-size: .95rem; }
+    .meta-pills { gap: .5rem; }
+    .meta-pills .badge {
+      background: #fff;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      font-weight: 500;
+      padding: .5rem .75rem;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px -18px rgba(31, 39, 51, .25);
+    }
+    .card-header {
+      background: transparent;
+      border-bottom: 1px solid var(--line);
+      font-weight: 600;
+      padding: 1rem 1.25rem;
+    }
+    .table { margin-bottom: 0; }
+    .table thead th {
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .table tbody td, .table tbody th, .table tfoot td, .table tfoot th {
+      border-color: var(--line);
+      padding: .6rem .75rem;
+      vertical-align: middle;
+    }
+    .table tbody tr:hover { background: #f4f7fb; }
+    .table tfoot { border-top: 2px solid var(--line); }
+    .table tfoot th, .table tfoot td { font-weight: 700; }
+    .rowhead { font-weight: 600; white-space: nowrap; }
+    .num {
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .num.pos { color: var(--pos); }
+    .num.neg { color: var(--neg); }
+    .num.zero { color: #aab2bd; }
+    .pill {
+      border-radius: 999px;
+      display: inline-block;
+      font-size: .8rem;
+      font-weight: 600;
+      line-height: 1;
+      padding: .4rem .75rem;
+    }
+    .pill.pill-blue { background: #e5efff; color: #1c4faf; }
+    .pill.pill-red { background: #fde4ea; color: #a51d3c; }
+  </style>
+</head>
+<body>
+  {% macro money(value) -%}
+    {%- set v = value | float | round -%}
+    <td class="num {{ 'pos' if v > 0 else 'neg' if v < 0 else 'zero' }}">{{ value | money }}</td>
+  {%- endmacro %}
+
+  <main class="container page py-5">
+    <header class="report-head mb-4">
+      <h1>Transaction report</h1>
+      <p class="lead mb-3">Categorised spending, summed by month.</p>
+      <div class="d-flex flex-wrap meta-pills">
+        <span class="badge">{{ transaction_count }} transactions</span>
+        <span class="badge">{{ date_from }} &rarr; {{ date_to }}</span>
+        <span class="badge">Generated {{ generated_at }}</span>
+      </div>
+    </header>
+
+    <section class="card mb-4">
+      <div class="card-header">Category sums by month</div>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th scope="col">Category</th>
+              {% for month in months %}
+              <th scope="col" class="num">{{ month }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in rows %}
+            <tr>
+              <th scope="row" class="rowhead">
+                <span class="pill {{ 'pill-red' if row.category == 'unknown' else 'pill-blue' }} badge rounded-pill {{ 'text-bg-danger' if row.category == 'unknown' else 'text-bg-primary' }}">{{ row.category }}</span>
+              </th>
+              {% for amount in row.amounts %}
+              {{ money(amount) }}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th scope="row">Total</th>
+              {% for amount in month_totals %}
+              {{ money(amount) }}
+              {% endfor %}
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-header">Transactions</div>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              {% for column in columns %}
+              <th scope="col" class="{{ 'num' if column == 'amount' else '' }}">{{ column }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for record in transactions %}
+            <tr>
+              {% for column in columns %}
+              {% if column == "amount" %}
+              {{ money(record[column]) }}
+              {% else %}
+              <td>{{ record[column] if record[column] is not none else "" }}</td>
+              {% endif %}
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

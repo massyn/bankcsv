@@ -1,0 +1,43 @@
+# Category mapping for transaction categorisation.
+#
+# Each top-level key is a category name. Its value is a LIST of rule blocks --
+# each block is one way that category can be recognised. The category matches a
+# transaction if ANY block matches.
+#
+# A block:
+#   narration: "What we see on the bank statement"   # mandatory
+#              supports "*" and "?" wildcards, matched case-insensitively
+#   amount:    12.99                                  # optional
+#              single value, or [min, max] for an inclusive range
+#   date:      2026-01-01                             # optional
+#              single value, or [start, end] for an inclusive range
+#
+# A block that also constrains amount/date is "more specific" and wins when
+# several categories match the same transaction.
+
+Utilities - Electricity:
+  - narration: "AGL Energy*"
+  - narration: "AGL*PAYMENT"
+  - narration: "*ELECTRICITY*"
+
+Utilities - Gas:
+  - narration: "Origin*"
+
+Groceries:
+  - narration: "WOOLWORTHS*"
+  - narration: "COLES*"
+  - narration: "ALDI*"
+
+Coffee:
+  - narration: "*COFFEE*"
+  - narration: "*CAFE*"
+    amount: [-9.00, -2.00]
+
+Salary:
+  - narration: "*SALARY*"
+    amount: [1000.00, 100000.00]
+
+Rent:
+  - narration: "*RENT*"
+    amount: -2200.00
+    date: [2026-01-01, 2026-12-31]
